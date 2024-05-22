@@ -2,7 +2,7 @@ import React from 'react'
 
 const App = () => {
   return (
-    <div className='font-poppins'>App</div>
+    <div className='font-poppins text-Primary'>App</div>
   )
 }
 
