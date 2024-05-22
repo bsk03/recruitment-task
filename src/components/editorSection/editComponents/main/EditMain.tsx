@@ -11,6 +11,7 @@ interface Option {
 
 type SetFileProps = {
 	setFile:React.Dispatch<React.SetStateAction<string | null>>
+  setImage:React.Dispatch<React.SetStateAction<string | null>>
 }
 
 
@@ -34,13 +35,20 @@ const OPTIONS: Option[] = [
 
 const EditMain = (props:SetFileProps) => {
   const inputFileRef = useRef<HTMLInputElement>(null);
+  const inputImageRef = useRef<HTMLInputElement>(null);
+
   // const [file, setFile] = useState<string | null>(null);
 
   const handleButtonClick = (id: number) => {
     if (id === 3 && inputFileRef.current) {
       inputFileRef.current.click();
+    }else if(id === 2 && inputImageRef.current){
+      inputImageRef.current.click();
+
     }
   };
+
+  
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -49,6 +57,13 @@ const EditMain = (props:SetFileProps) => {
       console.log(fileURL);
     }
   };
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const imgURL = URL.createObjectURL(e.target.files[0]);
+      props.setImage(imgURL);
+    }
+  };
+
 
   return (
     <div className='w-[759px] h-[609px] grid grid-cols-2 gap-x-[29px] gap-y-[32px] content-center'>
@@ -70,6 +85,16 @@ const EditMain = (props:SetFileProps) => {
               className='hidden'
               ref={inputFileRef}
               onChange={handleChange}
+            />
+          )}
+          {option.id === 2 && (
+            <input
+              type="file"
+              name="image"
+              id="image"
+              className='hidden'
+              ref={inputImageRef}
+              onChange={handleImageChange}
             />
           )}
         </button>
