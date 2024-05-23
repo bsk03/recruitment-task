@@ -1,7 +1,7 @@
 import React from 'react';
 
-import LogoIcon from '../../../../../public/icons/LogoIcon';
-import ResetIcon from '../../../../../public/icons/ResetIcon';
+import LogoIcon from '../../../public/icons/LogoIcon';
+import ResetIcon from '../../../public/icons/ResetIcon';
 
 const EditHeader = () => {
 	return (

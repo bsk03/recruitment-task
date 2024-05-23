@@ -1,7 +1,8 @@
 import React from 'react';
-import EditHeader from './editComponents/header/EditHeader';
-import EditMain from './editComponents/main/EditMain';
+
 import Button from '../Button';
+import EditHeader from './EditHeader';
+import EditMain from './EditMain';
 
 type SetFileProps = {
 	setFile:React.Dispatch<React.SetStateAction<string | null>>

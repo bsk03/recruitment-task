@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import DeleteIcon from '../../../public/icons/DeleteIcon';
 import Move from '../../../public/icons/Move';
 
@@ -14,6 +14,7 @@ const ImageArea = (props: ImageProps) => {
 	};
 
 	const boxRef = useRef<HTMLDivElement>(null);
+	const imageRef = useRef<HTMLImageElement>(null);
 	const moveButtonRef = useRef<HTMLDivElement>(null);
 	const resizeButtonRef = useRef<HTMLDivElement>(null);
 	const isMoving = useRef<boolean>(false);
@@ -27,8 +28,8 @@ const ImageArea = (props: ImageProps) => {
 		startWidth: number;
 		startHeight: number;
 	}>({
-		startX: 220,
-		startY: 220,
+		startX: 30,
+		startY: 30,
 		lastX: 0,
 		lastY: 0,
 		startWidth: 0,
@@ -43,15 +44,14 @@ const ImageArea = (props: ImageProps) => {
 			!resizeButtonRef.current
 		)
 			return;
-		console.log('wchodze');
+		console.log('wchodzi');
 		const container = props.containerRef.current;
 		const box = boxRef.current;
+		const image = imageRef.current;
 		const moveButton = moveButtonRef.current;
 		const resizeButton = resizeButtonRef.current;
-
 		const containerRect = container.getBoundingClientRect();
 
-		// Calculate initial position to center the image
 		const initialX = (containerRect.width - box.offsetWidth) / 2;
 		const initialY = (containerRect.height - box.offsetHeight) / 2;
 
@@ -90,8 +90,7 @@ const ImageArea = (props: ImageProps) => {
 			if (isMoving.current) {
 				const nextX = e.clientX - cords.current.startX + cords.current.lastX;
 				const nextY = e.clientY - cords.current.startY + cords.current.lastY;
-console.log('x ' +nextX);
-console.log('y ' + nextY);
+
 				const minX = 0;
 				const minY = 0;
 				const maxX = containerRect.width - box.offsetWidth;
@@ -106,7 +105,7 @@ console.log('y ' + nextY);
 				box.style.left = `${clampedX}px`;
 			}
 
-			if (isResizing.current) {
+			if (isResizing.current && image) {
 				const newWidth =
 					cords.current.startWidth + (e.clientX - cords.current.startX);
 				const newHeight =
@@ -114,15 +113,15 @@ console.log('y ' + nextY);
 
 				const clampedWidth = Math.max(
 					50,
-					Math.min(newWidth, containerRect.width - box.offsetLeft)
+					Math.min(newWidth, containerRect.width - image.offsetLeft)
 				);
 				const clampedHeight = Math.max(
 					50,
-					Math.min(newHeight, containerRect.height - box.offsetTop)
+					Math.min(newHeight, containerRect.height - image.offsetTop)
 				);
 
-				box.style.width = `${clampedWidth}px`;
-				box.style.height = `${clampedHeight}px`;
+				image.style.width = `${clampedWidth}px`;
+				image.style.height = `${clampedHeight}px`;
 			}
 		};
 
@@ -140,7 +139,10 @@ console.log('y ' + nextY);
 	}, []);
 
 	return (
-		<div className='border-[2px] border-Primary absolute' ref={boxRef}>
+		<div
+			className={'border-[2px] border-Primary absolute top-[200px] select-none'}
+			ref={boxRef}
+		>
 			<div className='absolute top-[-13px] right-[-13px]'>
 				<button
 					className='h-[24px] w-[24px] rounded-full bg-white flex justify-center items-center'
@@ -161,9 +163,10 @@ console.log('y ' + nextY);
 			</div>
 			{props.image !== null && (
 				<img
+					ref={imageRef}
 					src={props.image}
 					alt='Uploaded image'
-					className='w-full h-full object-cover'
+					className='w-[200px] h-[200px] object-contain'
 				/>
 			)}
 		</div>

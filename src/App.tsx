@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+
 import Poster from './components/posterSection/Poster';
 import EditorLayout from './components/editorSection/EditorLayout';
+import { useState } from 'react';
 
 const App = () => {
 	const [file, setFile] = useState<string | null>(null);

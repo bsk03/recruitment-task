@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
-import TextIcon from '../../../../../public/icons/TextIcon';
-import ImgIcon from '../../../../../public/icons/ImgIcon';
-import BackgroundIcon from '../../../../../public/icons/BackgroundIcon';
+import TextIcon from '../../../public/icons/TextIcon';
+import ImgIcon from '../../../public/icons/ImgIcon';
+import BackgroundIcon from '../../../public/icons/BackgroundIcon';
 
 interface Option {
   id: number;

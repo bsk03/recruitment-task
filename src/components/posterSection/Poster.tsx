@@ -19,7 +19,8 @@ const Poster = (props: ImageProps) => {
 			<img
 				src={props.file ? props.file : startImage}
 				alt='Start image'
-				className='w-[759px] h-[948px]'
+				className='w-[759px] h-[948px] select-none object'
+				
 			/>
 			{props.image && (
 				<ImageArea image={props.image} setImage={props.setImage} containerRef={containerRef} />
