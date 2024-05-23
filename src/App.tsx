@@ -11,7 +11,7 @@ const App = () => {
 	return (
 		<div className='font-poppins flex justify-center align-middle gap-[32px]  m-[32px]'>
 			<div className='w-[759px] h-[948px]'>
-				<Poster file={file} text={text} image={image} setImage={setImage} showText={showText} />
+				<Poster file={file} text={text} image={image} setImage={setImage} showText={showText} setShowText={setShowText}/>
 			</div>
 			<div className='w-[759px] h-[948px]'>
         <EditorLayout setFile={setFile} setImage={setImage} setShowText={setShowText}/>

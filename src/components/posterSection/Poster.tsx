@@ -9,10 +9,13 @@ type ImageProps = {
 	text: string | null;
 	image: string | null;
 	setImage: React.Dispatch<React.SetStateAction<string | null>>;
+	setShowText:React.Dispatch<React.SetStateAction<boolean>>
 };
 
 const Poster = (props: ImageProps) => {
 	const containerRef = useRef<HTMLDivElement>(null);
+
+	
 
 	return (
 		<div className='relative' ref={containerRef}>
@@ -20,12 +23,19 @@ const Poster = (props: ImageProps) => {
 				src={props.file ? props.file : startImage}
 				alt='Start image'
 				className='w-[759px] h-[948px] select-none object'
-				
 			/>
-			{props.image && (
-				<ImageArea image={props.image} setImage={props.setImage} containerRef={containerRef} />
-			)}
-			{props.showText && <TextAreaSection />}
+			<span>
+				{props.image && (
+					<ImageArea
+						image={props.image}
+						setImage={props.setImage}
+						containerRef={containerRef}
+					/>
+				)}
+			</span>
+			<span>
+				{props.showText && <TextAreaSection containerRef={containerRef} setShowText={props.setShowText} />}
+			</span>
 		</div>
 	);
 };

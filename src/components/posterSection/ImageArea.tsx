@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import DeleteIcon from '../../../public/icons/DeleteIcon';
 import Move from '../../../public/icons/Move';
+import TextAreaSection from './TextAreaSection';
 
 type ImageProps = {
 	image: string | null;
@@ -136,7 +137,7 @@ const ImageArea = (props: ImageProps) => {
 				ref={resizeButtonRef}
 			/>
 			<div
-				className='h-[40px] w-[40px] bg-white rounded-full flex justify-center items-center absolute top-[-20px] left-[-20px] cursor-grab'
+				className={`${!showEditBar ? 'hidden' : ''} h-[40px] w-[40px] bg-white rounded-full flex justify-center items-center absolute top-[-20px] left-[-20px] cursor-grab`}
 				ref={moveButtonRef}
 			>
 				<Move height={'31'} width={'31'} color={'rgba(114, 9, 183, 1)'} />
@@ -146,9 +147,10 @@ const ImageArea = (props: ImageProps) => {
 					ref={imageRef}
 					src={props.image}
 					alt='Uploaded image'
-					className='w-[200px] h-[200px] object-contain'
+					className='w-[200px] h-[200px] object-contain select-none'
 				/>
 			)}
+			
 		</div>
 	);
 };
