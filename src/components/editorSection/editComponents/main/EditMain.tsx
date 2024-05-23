@@ -12,6 +12,7 @@ interface Option {
 type SetFileProps = {
 	setFile:React.Dispatch<React.SetStateAction<string | null>>
   setImage:React.Dispatch<React.SetStateAction<string | null>>
+  setShowText: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 
@@ -20,16 +21,19 @@ const OPTIONS: Option[] = [
     id: 1,
     text: 'Text',
     svg: <TextIcon height={'96'} width={'88'} color={'#676767'} />,
+    
   },
   {
     id: 2,
     text: 'Image',
     svg: <ImgIcon height={'96'} width={'88'} color={'#676767'} />,
+    
   },
   {
     id: 3,
     text: 'Background',
     svg: <BackgroundIcon height={'96'} width={'96'} color={'#676767'} />,
+    
   },
 ];
 
@@ -45,6 +49,8 @@ const EditMain = (props:SetFileProps) => {
     }else if(id === 2 && inputImageRef.current){
       inputImageRef.current.click();
 
+    }else if(id===1){
+      props.setShowText(true);
     }
   };
 

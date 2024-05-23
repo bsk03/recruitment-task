@@ -6,6 +6,7 @@ import Button from '../Button';
 type SetFileProps = {
 	setFile:React.Dispatch<React.SetStateAction<string | null>>
 	setImage:React.Dispatch<React.SetStateAction<string | null>>
+	setShowText: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const EditorLayout = (props:SetFileProps) => {
@@ -16,7 +17,7 @@ const EditorLayout = (props:SetFileProps) => {
 			<div className='w-full h-[75px] bg-white97 py-[24px] px-[16px] mb-[32px] rounded-[10px]'>
 				<h2 className='font-bold text-[18px] text-Black100'>Add content</h2>
 			</div>
-			<EditMain setFile={props.setFile} setImage={props.setImage}/>
+			<EditMain setFile={props.setFile} setImage={props.setImage} setShowText={props.setShowText}/>
 			<div className='border-[1px] border-white98 my-[32px]' />
 			<div className='absolute bottom-0 right-0'>
 				<Button value={'Export to PNG'} />
