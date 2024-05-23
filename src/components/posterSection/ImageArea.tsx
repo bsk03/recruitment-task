@@ -13,21 +13,16 @@ const ImageArea = (props: ImageProps) => {
 		props.setImage(null);
 	};
 
+	const [showEditBar, setShowEditBar] = useState(false);
 	const boxRef = useRef<HTMLDivElement>(null);
 	const imageRef = useRef<HTMLImageElement>(null);
 	const moveButtonRef = useRef<HTMLDivElement>(null);
 	const resizeButtonRef = useRef<HTMLDivElement>(null);
-	const isMoving = useRef<boolean>(false);
-	const isResizing = useRef<boolean>(false);
 
-	const cords = useRef<{
-		startX: number;
-		startY: number;
-		lastX: number;
-		lastY: number;
-		startWidth: number;
-		startHeight: number;
-	}>({
+	const isMoving = useRef(false);
+	const isResizing = useRef(false);
+
+	const cords = useRef({
 		startX: 30,
 		startY: 30,
 		lastX: 0,
@@ -37,38 +32,31 @@ const ImageArea = (props: ImageProps) => {
 	});
 
 	useEffect(() => {
-		if (
-			!boxRef.current ||
-			!props.containerRef.current ||
-			!moveButtonRef.current ||
-			!resizeButtonRef.current
-		)
-			return;
-		console.log('wchodzi');
 		const container = props.containerRef.current;
 		const box = boxRef.current;
 		const image = imageRef.current;
 		const moveButton = moveButtonRef.current;
 		const resizeButton = resizeButtonRef.current;
-		const containerRect = container.getBoundingClientRect();
 
+		if (!container || !box || !moveButton || !resizeButton) return;
+
+		const containerRect = container.getBoundingClientRect();
 		const initialX = (containerRect.width - box.offsetWidth) / 2;
 		const initialY = (containerRect.height - box.offsetHeight) / 2;
 
 		box.style.top = `${initialY}px`;
 		box.style.left = `${initialX}px`;
-
 		cords.current.lastX = initialX;
 		cords.current.lastY = initialY;
 
-		const onMouseDownMove = (e: MouseEvent) => {
+		const handleMouseDownMove = (e: MouseEvent) => {
 			e.stopPropagation();
 			isMoving.current = true;
 			cords.current.startX = e.clientX;
 			cords.current.startY = e.clientY;
 		};
 
-		const onMouseDownResize = (e: MouseEvent) => {
+		const handleMouseDownResize = (e: MouseEvent) => {
 			e.stopPropagation();
 			isResizing.current = true;
 			cords.current.startX = e.clientX;
@@ -77,7 +65,7 @@ const ImageArea = (props: ImageProps) => {
 			cords.current.startHeight = box.clientHeight;
 		};
 
-		const onMouseUp = () => {
+		const handleMouseUp = () => {
 			isMoving.current = false;
 			isResizing.current = false;
 			cords.current.lastX = box.offsetLeft;
@@ -86,64 +74,56 @@ const ImageArea = (props: ImageProps) => {
 			cords.current.startHeight = box.clientHeight;
 		};
 
-		const onMouseMove = (e: MouseEvent) => {
+		const handleMouseMove = (e: MouseEvent) => {
 			if (isMoving.current) {
 				const nextX = e.clientX - cords.current.startX + cords.current.lastX;
 				const nextY = e.clientY - cords.current.startY + cords.current.lastY;
-
-				const minX = 0;
-				const minY = 0;
 				const maxX = containerRect.width - box.offsetWidth;
 				const maxY = containerRect.height - box.offsetHeight;
 
-				const clampedX = Math.max(minX, Math.min(nextX, maxX));
-				const clampedY = Math.max(minY, Math.min(nextY, maxY));
-				console.log('clampedX ' + clampedX);
-				console.log('clampedY ' + clampedY);
-				console.log('moving');
-				box.style.top = `${clampedY}px`;
-				box.style.left = `${clampedX}px`;
+				box.style.top = `${Math.max(0, Math.min(nextY, maxY))}px`;
+				box.style.left = `${Math.max(0, Math.min(nextX, maxX))}px`;
 			}
 
 			if (isResizing.current && image) {
-				const newWidth =
-					cords.current.startWidth + (e.clientX - cords.current.startX);
-				const newHeight =
-					cords.current.startHeight + (e.clientY - cords.current.startY);
-
-				const clampedWidth = Math.max(
-					50,
-					Math.min(newWidth, containerRect.width - image.offsetLeft)
-				);
-				const clampedHeight = Math.max(
-					50,
-					Math.min(newHeight, containerRect.height - image.offsetTop)
-				);
+				const newWidth = cords.current.startWidth + (e.clientX - cords.current.startX);
+				const newHeight = cords.current.startHeight + (e.clientY - cords.current.startY);
+				const clampedWidth = Math.max(50, Math.min(newWidth, containerRect.width - box.offsetLeft));
+				const clampedHeight = Math.max(50, Math.min(newHeight, containerRect.height - box.offsetTop));
 
 				image.style.width = `${clampedWidth}px`;
 				image.style.height = `${clampedHeight}px`;
 			}
 		};
 
-		moveButton.addEventListener('mousedown', onMouseDownMove);
-		resizeButton.addEventListener('mousedown', onMouseDownResize);
-		document.addEventListener('mouseup', onMouseUp);
-		document.addEventListener('mousemove', onMouseMove);
+		const handleClickOutside = (e: MouseEvent) => {
+			if (box && !box.contains(e.target as Node)) {
+				setShowEditBar(false);
+			}
+		};
+
+		moveButton.addEventListener('mousedown', handleMouseDownMove);
+		resizeButton.addEventListener('mousedown', handleMouseDownResize);
+		document.addEventListener('mouseup', handleMouseUp);
+		document.addEventListener('mousemove', handleMouseMove);
+		document.addEventListener('mousedown', handleClickOutside);
 
 		return () => {
-			moveButton.removeEventListener('mousedown', onMouseDownMove);
-			resizeButton.removeEventListener('mousedown', onMouseDownResize);
-			document.removeEventListener('mouseup', onMouseUp);
-			document.removeEventListener('mousemove', onMouseMove);
+			moveButton.removeEventListener('mousedown', handleMouseDownMove);
+			resizeButton.removeEventListener('mousedown', handleMouseDownResize);
+			document.removeEventListener('mouseup', handleMouseUp);
+			document.removeEventListener('mousemove', handleMouseMove);
+			document.removeEventListener('mousedown', handleClickOutside);
 		};
-	}, []);
+	}, [props.containerRef]);
 
 	return (
 		<div
-			className={'border-[2px] border-Primary absolute top-[200px] select-none'}
+			className={`${showEditBar ? 'border-[2px] border-Primary' : ''} absolute top-[200px] select-none`}
 			ref={boxRef}
+			onMouseDown={() => setShowEditBar(true)}
 		>
-			<div className='absolute top-[-13px] right-[-13px]'>
+			<div className={`${!showEditBar ? 'hidden' : ''} absolute top-[-13px] right-[-13px]`}>
 				<button
 					className='h-[24px] w-[24px] rounded-full bg-white flex justify-center items-center'
 					onClick={deleteImage}
@@ -152,7 +132,7 @@ const ImageArea = (props: ImageProps) => {
 				</button>
 			</div>
 			<div
-				className='h-[24px] w-[24px] bg-Primary border-[4px] border-white rounded-full absolute bottom-[-13px] right-[-13px] cursor-nwse-resize'
+				className={`${!showEditBar ? 'hidden' : ''} h-[24px] w-[24px] bg-Primary border-[4px] border-white rounded-full absolute bottom-[-13px] right-[-13px] cursor-nwse-resize`}
 				ref={resizeButtonRef}
 			/>
 			<div
@@ -161,7 +141,7 @@ const ImageArea = (props: ImageProps) => {
 			>
 				<Move height={'31'} width={'31'} color={'rgba(114, 9, 183, 1)'} />
 			</div>
-			{props.image !== null && (
+			{props.image && (
 				<img
 					ref={imageRef}
 					src={props.image}
