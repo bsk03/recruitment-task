@@ -167,7 +167,7 @@ console.log(selectedColor);
         <Move height={'31'} width={'31'} color={'rgba(114, 9, 183, 1)'} />
       </div>
       <textarea
-        className='w-[302px] h-[96px] bg-transparent text-[32px] font-bold text-center outline-none overflow-auto resize-none'
+        className='w-[302px] h-[96px] bg-transparent text-[32px] font-bold text-center outline-none overflow-auto resize-none overflow-hidden'
         name='customText'
         id='customText'
         placeholder='Type your text here'

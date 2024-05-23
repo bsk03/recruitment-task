@@ -24,8 +24,8 @@ const ImageArea = (props: ImageProps) => {
 	const isResizing = useRef(false);
 
 	const cords = useRef({
-		startX: 30,
-		startY: 30,
+		startX: 0,
+		startY: 0,
 		lastX: 0,
 		lastY: 0,
 		startWidth: 0,
