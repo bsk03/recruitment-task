@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-div[contenteditable="true"]::before {
-    content: attr(placeholder);
-    opacity: 0.25;
-}
+/* @layer components{
+    .test{
+        @apply text-[40px]
+    }
+} */

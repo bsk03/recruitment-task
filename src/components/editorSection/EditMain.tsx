@@ -93,6 +93,7 @@ const EditMain = (props:SetFileProps) => {
               className='hidden'
               ref={inputFileRef}
               onChange={handleChange}
+              onClick={e=>e.currentTarget.value=''}
             />
           )}
           {option.id === 2 && (
