@@ -1,4 +1,3 @@
-import React from 'react';
 
 import LogoIcon from '../../../public/icons/LogoIcon';
 import ResetIcon from '../../../public/icons/ResetIcon';

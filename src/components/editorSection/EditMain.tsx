@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef} from 'react';
 import TextIcon from '../../../public/icons/TextIcon';
 import ImgIcon from '../../../public/icons/ImgIcon';
 import BackgroundIcon from '../../../public/icons/BackgroundIcon';

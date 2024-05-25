@@ -1,4 +1,3 @@
-import React from 'react';
 
 const COLORS = [
 	{ id: 1, name: 'black', color: '#353535' },

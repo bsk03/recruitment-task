@@ -1,6 +1,5 @@
 import React from 'react';
 import { exportComponentAsPNG } from 'react-component-export-image';
-import Button from '../Button';
 import EditHeader from './EditHeader';
 import EditMain from './EditMain';
 

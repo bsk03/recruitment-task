@@ -1,8 +1,7 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import startImage from '../../../public/images/startImage.png';
 import ImageArea from './ImageArea';
 import TextAreaSection from './TextAreaSection';
-import { exportComponentAsPNG } from 'react-component-export-image';
 
 type ImageProps = {
 	showText: boolean;

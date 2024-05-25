@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import DeleteIcon from '../../../public/icons/DeleteIcon';
 import Move from '../../../public/icons/Move';
-import TextAreaSection from './TextAreaSection';
 
 type ImageProps = {
 	image: string | null;
