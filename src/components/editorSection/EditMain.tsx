@@ -64,9 +64,11 @@ const EditMain = (props:SetFileProps) => {
     }
   };
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+
     if (e.target.files && e.target.files[0]) {
       const imgURL = URL.createObjectURL(e.target.files[0]);
       props.setImage(imgURL);
+      // console.log(imgURL);
     }
   };
 
@@ -101,6 +103,7 @@ const EditMain = (props:SetFileProps) => {
               className='hidden'
               ref={inputImageRef}
               onChange={handleImageChange}
+              onClick={e=>e.currentTarget.value=''}
             />
           )}
         </button>
