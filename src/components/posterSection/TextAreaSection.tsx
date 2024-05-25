@@ -166,7 +166,7 @@ const TextAreaSection = (props: TextAreaProps) => {
 					className='h-[24px] w-[24px] rounded-full bg-white flex justify-center items-center'
 					onClick={deleteText}
 				>
-					<DeleteIcon height={'23'} width={'20'} color={'red'} />
+					<DeleteIcon height={'18'} width={'18'} color={'red'} />
 				</button>
 			</div>
 			<div
@@ -181,7 +181,7 @@ const TextAreaSection = (props: TextAreaProps) => {
 				} h-[40px] w-[40px] bg-white rounded-full flex justify-center items-center absolute top-[-20px] left-[-20px] cursor-grab`}
 				ref={moveButtonRef}
 			>
-				<Move height={'31'} width={'31'} color={'rgba(114, 9, 183, 1)'} />
+				<Move height={'32'} width={'32'} color={'rgba(114, 9, 183, 1)'} />
 			</div>
 			<div
 				className={`w-[302px] h-[96px] bg-transparent text-[32px] font-bold text-center outline-none overflow-hidden resize-none ${

@@ -1,6 +1,7 @@
 import Poster from './components/posterSection/Poster';
 import EditorLayout from './components/editorSection/EditorLayout';
 import { useEffect, useRef, useState, createContext } from 'react';
+import RestartBox from './components/RestartBox';
 
 type ResetContext = {
 	reset: () => void;
@@ -19,6 +20,7 @@ const App = () => {
 		setShowText(false);
 		setImage(null);
 		setPosterReady(true);
+		setIsPopupOpen(false);
 	};
 
 	useEffect(() => {
@@ -29,10 +31,22 @@ const App = () => {
 		}
 	}, [file, showText, image]);
 
+	const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+	const openPopup = () => {
+		setIsPopupOpen(true);
+	};
+
+	const closePopup = () => {
+		setIsPopupOpen(false);
+	};
+
 	const posterRef = useRef<HTMLDivElement>(null);
+
 	return (
 		<ResetContext.Provider value={{ reset }}>
-			<div className='font-poppins flex justify-center align-middle gap-[32px]  m-[32px]'>
+			<div className='font-poppins flex justify-center align-middle gap-[32px] m-[32px]'>
+				{isPopupOpen && <RestartBox closePopup={closePopup} />}
 				<div className='w-[759px] h-[948px]'>
 					<Poster
 						file={file}
@@ -50,6 +64,7 @@ const App = () => {
 						setShowText={setShowText}
 						posterRef={posterRef}
 						posterReady={posterReady}
+						openPopup={openPopup}
 					/>
 				</div>
 			</div>

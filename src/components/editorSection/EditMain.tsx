@@ -20,19 +20,19 @@ const OPTIONS: Option[] = [
   {
     id: 1,
     text: 'Text',
-    svg: <TextIcon height={'96'} width={'88'} color={'#676767'} />,
+    svg: <TextIcon height={'128'} width={'8128'} color={'#676767'} />,
     
   },
   {
     id: 2,
     text: 'Image',
-    svg: <ImgIcon height={'96'} width={'88'} color={'#676767'} />,
+    svg: <ImgIcon height={'128'} width={'128'} color={'#676767'} />,
     
   },
   {
     id: 3,
     text: 'Background',
-    svg: <BackgroundIcon height={'96'} width={'96'} color={'#676767'} />,
+    svg: <BackgroundIcon height={'128'} width={'128'} color={'#676767'} />,
     
   },
 ];

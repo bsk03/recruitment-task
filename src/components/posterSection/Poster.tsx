@@ -17,7 +17,8 @@ const Poster = (props: ImageProps) => {
 
 	return (
 		<span>
-			<div className='relative w-[759px] h-[948px] bg-Black50' ref={containerRef}>
+			<div className='relative w-[759px] h-[948px] bg-Black50' ref={containerRef} >
+				
 				<img
 					src={props.file ? props.file : startImage}
 					alt='Poster image'
