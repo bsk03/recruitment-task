@@ -1,6 +1,6 @@
 import Poster from './components/posterSection/Poster';
 import EditorLayout from './components/editorSection/EditorLayout';
-import { useEffect, useRef, useState, useContext, createContext } from 'react';
+import { useEffect, useRef, useState, createContext } from 'react';
 
 type ResetContext = {
 	reset: () => void;
