@@ -141,10 +141,3 @@ const useCustomizeObject = ({
 };
 
 export default useCustomizeObject;
-
-// textareaRef,
-// 		showEditBar,
-// 		boxRef,
-// 		setShowEditBar,
-// 		resizeButtonRef,
-// 		moveButtonRef,
