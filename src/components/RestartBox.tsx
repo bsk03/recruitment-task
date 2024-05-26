@@ -2,6 +2,7 @@ import React, {useContext, MouseEventHandler, useRef, useEffect } from 'react';
 import AlertIcon from '../../public/icons/AlertIcon';
 import CloseIcon from '../../public/icons/CloseIcon';
 import { ResetContext } from '../App';
+import Button from './Button';
 
 
 type RestartBoxProps = {
@@ -50,9 +51,7 @@ const RestartBox: React.FC<RestartBoxProps> = ({ closePopup }) => {
 					<button onClick={closePopup} className='text-[18px]'>
 						Close
 					</button>
-					<button className='px-[30px] py-[6px] rounded-[5px] bg-Primary text-white text-[15px] font-semibold hover:bg-[#550788] focus:outline-none focus:ring-2 focus:ring-[#7209B7] focus:ring-opacity-50 disabled:bg-[#CDCDCD] transition-[0.4s] disabled:cursor-not-allowed' onClick={()=>reset?.reset()}>
-						Confirm
-					</button>
+					<Button value={'Confirm'} whenDisabled={false} functionOnClick={()=>reset?.reset()}/>
 				</div>
 				<button
 					className='absolute top-[36px] right-[36px]'

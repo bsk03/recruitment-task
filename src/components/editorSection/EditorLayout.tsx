@@ -3,6 +3,7 @@ import EditHeader from './EditHeader';
 import EditMain from './EditMain';
 
 import { toPng } from 'html-to-image';
+import Button from '../Button';
 
 type SetFileProps = {
 	setFile: React.Dispatch<React.SetStateAction<string | null>>;
@@ -58,13 +59,12 @@ const EditorLayout = (props: SetFileProps) => {
 			/>
 			<div className='border-[1px] border-white98 my-[32px]' />
 			<div className='absolute bottom-0 right-0'>
-				<button
-					onClick={exportToPng}
-					className='px-[30px] py-[6px] rounded-[5px] bg-Primary text-white text-[15px] font-semibold hover:bg-[#550788] focus:outline-none focus:ring-2 focus:ring-[#7209B7] focus:ring-opacity-50 disabled:bg-[#CDCDCD] transition-[0.4s] disabled:cursor-not-allowed'
-					disabled={props.posterReady}
-				>
-					Export As PNG
-				</button>
+				<Button
+					value={'Export As PNG'}
+					whenDisabled={props.posterReady}
+					functionOnClick={exportToPng}
+				/>
+			
 			</div>
 		</div>
 	);
