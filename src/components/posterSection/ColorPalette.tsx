@@ -11,7 +11,7 @@ type ColorPaletteProps = {
 	handleColorChange: (color: string) => void;
 	selectedColor: string;
 };
-console.log(COLORS[1].color);
+
 const ColorPalette = ({
 	handleColorChange,
 	selectedColor,
@@ -29,7 +29,7 @@ const ColorPalette = ({
 						className={`h-[16px] w-[16px] rounded-full cursor-pointer`}
 						title={variant.name}
 						onClick={() => handleColorChange(variant.color)}
-						style={{backgroundColor: variant.color}} // tailwind buguje, to musi być tak
+						style={{backgroundColor: variant.color}}
 					/>
 				</div>
 			))}

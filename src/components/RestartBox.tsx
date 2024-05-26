@@ -31,7 +31,7 @@ const RestartBox: React.FC<RestartBoxProps> = ({ closePopup }) => {
 		<div className='fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50'>
 			<div
 				ref={boxRef}
-				className='bg-white p-5 rounded-lg shadow-lg flex justify-evenly align-middle flex-col h-[584px] w-[643px] flex justify-center items-center absolute'
+				className='bg-white p-5 rounded-lg shadow-lg flex justify-evenly align-middle flex-col h-[584px] w-[643px]  items-center absolute'
 			>
 				<div className='flex flex-col justify-center items-center  w-[387px]'>
 					<div className='flex justify-center items-center'>

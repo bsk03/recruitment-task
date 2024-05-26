@@ -1,15 +1,14 @@
 import LogoIcon from '../../../public/icons/LogoIcon';
 import ResetIcon from '../../../public/icons/ResetIcon';
 
-import { MouseEventHandler, useContext } from 'react';
-import { ResetContext } from '../../App';
+import { MouseEventHandler} from 'react';
+
 
 type EditHeaderProps={
 	openPopup: MouseEventHandler<HTMLButtonElement>;
 }
 
 const EditHeader = (props:EditHeaderProps) => {
-	const reset = useContext(ResetContext);
 
 	return (
 		<div className='flex justify-between items-center'>

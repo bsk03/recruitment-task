@@ -1,81 +1,43 @@
-import React, { useRef} from 'react';
-import TextIcon from '../../../public/icons/TextIcon';
-import ImgIcon from '../../../public/icons/ImgIcon';
-import BackgroundIcon from '../../../public/icons/BackgroundIcon';
-
-interface Option {
-  id: number;
-  text: string;
-  svg: JSX.Element;
-}
+import React, { useRef } from 'react';
+import { Option, OPTIONS } from './MenuOptions'; 
 
 type SetFileProps = {
-	setFile:React.Dispatch<React.SetStateAction<string | null>>
-  setImage:React.Dispatch<React.SetStateAction<string | null>>
+  setFile: React.Dispatch<React.SetStateAction<string | null>>;
+  setImage: React.Dispatch<React.SetStateAction<string | null>>;
   setShowText: React.Dispatch<React.SetStateAction<boolean>>;
-}
+};
 
-
-const OPTIONS: Option[] = [
-  {
-    id: 1,
-    text: 'Text',
-    svg: <TextIcon height={'128'} width={'8128'} color={'#676767'} />,
-    
-  },
-  {
-    id: 2,
-    text: 'Image',
-    svg: <ImgIcon height={'128'} width={'128'} color={'#676767'} />,
-    
-  },
-  {
-    id: 3,
-    text: 'Background',
-    svg: <BackgroundIcon height={'128'} width={'128'} color={'#676767'} />,
-    
-  },
-];
-
-const EditMain = (props:SetFileProps) => {
+const EditMain = (props: SetFileProps) => {
   const inputFileRef = useRef<HTMLInputElement>(null);
   const inputImageRef = useRef<HTMLInputElement>(null);
-
-  // const [file, setFile] = useState<string | null>(null);
 
   const handleButtonClick = (id: number) => {
     if (id === 3 && inputFileRef.current) {
       inputFileRef.current.click();
-    }else if(id === 2 && inputImageRef.current){
+    } else if (id === 2 && inputImageRef.current) {
       inputImageRef.current.click();
-
-    }else if(id===1){
+    } else if (id === 1) {
       props.setShowText(true);
     }
   };
-
-  
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const fileURL = URL.createObjectURL(e.target.files[0]);
       props.setFile(fileURL);
-      console.log(fileURL);
     }
   };
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const imgURL = URL.createObjectURL(e.target.files[0]);
       props.setImage(imgURL);
-      // console.log(imgURL);
     }
   };
 
-
   return (
     <div className='w-[759px] h-[609px] grid grid-cols-2 gap-x-[29px] gap-y-[32px] content-center'>
-      {OPTIONS.map((option) => (
+      {OPTIONS.map((option: Option) => (
         <button
           key={option.id}
           onClick={() => handleButtonClick(option.id)}
@@ -93,7 +55,7 @@ const EditMain = (props:SetFileProps) => {
               className='hidden'
               ref={inputFileRef}
               onChange={handleChange}
-              onClick={e=>e.currentTarget.value=''}
+              onClick={(e) => (e.currentTarget.value = '')}
             />
           )}
           {option.id === 2 && (
@@ -104,7 +66,7 @@ const EditMain = (props:SetFileProps) => {
               className='hidden'
               ref={inputImageRef}
               onChange={handleImageChange}
-              onClick={e=>e.currentTarget.value=''}
+              onClick={(e) => (e.currentTarget.value = '')}
             />
           )}
         </button>
