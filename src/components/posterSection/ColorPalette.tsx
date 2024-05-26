@@ -1,4 +1,3 @@
-
 const COLORS = [
 	{ id: 1, name: 'black', color: '#353535' },
 	{ id: 2, name: 'white', color: '#FFFFFF' },

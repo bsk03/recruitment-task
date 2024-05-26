@@ -1,6 +1,5 @@
-import TextIcon from '../../../public/icons/TextIcon';
-import ImgIcon from '../../../public/icons/ImgIcon';
-import BackgroundIcon from '../../../public/icons/BackgroundIcon';
+
+import {TextIcon,ImgIcon,BackgroundIcon} from '../icons';
 
 export type Option = {
 	id: number;

@@ -1,9 +1,7 @@
-import React, {useContext, MouseEventHandler, useRef, useEffect } from 'react';
-import AlertIcon from '../../public/icons/AlertIcon';
-import CloseIcon from '../../public/icons/CloseIcon';
+import React, { useContext, MouseEventHandler, useRef, useEffect } from 'react';
+import { AlertIcon,CloseIcon } from './icons';
 import { ResetContext } from '../App';
 import Button from './Button';
-
 
 type RestartBoxProps = {
 	closePopup: MouseEventHandler<HTMLButtonElement>;
@@ -25,7 +23,7 @@ const RestartBox: React.FC<RestartBoxProps> = ({ closePopup }) => {
 		};
 	}, []);
 
-	const reset = useContext(ResetContext)
+	const reset = useContext(ResetContext);
 
 	return (
 		<div className='fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50'>
@@ -51,7 +49,11 @@ const RestartBox: React.FC<RestartBoxProps> = ({ closePopup }) => {
 					<button onClick={closePopup} className='text-[18px]'>
 						Close
 					</button>
-					<Button value={'Confirm'} whenDisabled={false} functionOnClick={()=>reset?.reset()}/>
+					<Button
+						value={'Confirm'}
+						whenDisabled={false}
+						functionOnClick={() => reset?.reset()}
+					/>
 				</div>
 				<button
 					className='absolute top-[36px] right-[36px]'

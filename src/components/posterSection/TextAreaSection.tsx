@@ -1,8 +1,7 @@
-import { useEffect,useState } from 'react';
-import DeleteIcon from '../../../public/icons/DeleteIcon';
-import Move from '../../../public/icons/Move';
+import { useEffect, useState } from 'react';
+import {MoveIcon,DeleteIcon} from "../icons"
 import ColorPalette from './ColorPalette';
-import useCustomizeObject from '../hooks/useCustomizeObject';
+import useCustomizeObject from '../../hooks/useCustomizeObject';
 
 type TextAreaProps = {
 	containerRef: React.RefObject<HTMLDivElement>;
@@ -87,7 +86,7 @@ const TextAreaSection = (props: TextAreaProps) => {
 				} h-[40px] w-[40px] bg-white rounded-full flex justify-center items-center absolute top-[-20px] left-[-20px] cursor-grab`}
 				ref={moveButtonRef}
 			>
-				<Move height={'32'} width={'32'} color={'rgba(114, 9, 183, 1)'} />
+				<MoveIcon height={'32'} width={'32'} color={'rgba(114, 9, 183, 1)'} />
 			</div>
 			<div
 				className={`w-[302px] h-[96px] bg-transparent text-[32px] font-bold text-center outline-none overflow-hidden resize-none ${

@@ -1,7 +1,6 @@
-import { useRef} from 'react';
-import DeleteIcon from '../../../public/icons/DeleteIcon';
-import Move from '../../../public/icons/Move';
-import useCustomizeObject from '../hooks/useCustomizeObject';
+import { useRef } from 'react';
+import { DeleteIcon,MoveIcon } from '../icons';
+import useCustomizeObject from '../../hooks/useCustomizeObject';
 
 type ImageProps = {
 	image: string | null;
@@ -25,8 +24,6 @@ const ImageArea = (props: ImageProps) => {
 	const deleteImage = () => {
 		props.setImage(null);
 	};
-
-	
 
 	return (
 		<div
@@ -60,7 +57,7 @@ const ImageArea = (props: ImageProps) => {
 				} h-[40px] w-[40px] bg-white rounded-full flex justify-center items-center absolute top-[-20px] left-[-20px] cursor-grab`}
 				ref={moveButtonRef}
 			>
-				<Move height={'32'} width={'32'} color={'rgba(114, 9, 183, 1)'} />
+				<MoveIcon height={'32'} width={'32'} color={'rgba(114, 9, 183, 1)'} />
 			</div>
 			{props.image && (
 				<img
