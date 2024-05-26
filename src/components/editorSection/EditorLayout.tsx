@@ -1,9 +1,7 @@
-import React, { MouseEventHandler, useCallback } from 'react';
-import { exportComponentAsPNG } from 'react-component-export-image';
+import React, { MouseEventHandler } from 'react';
 import EditHeader from './EditHeader';
 import EditMain from './EditMain';
 
-import * as htmlToImage from 'html-to-image';
 import { toPng } from 'html-to-image';
 
 type SetFileProps = {
@@ -23,22 +21,21 @@ const EditorLayout = (props: SetFileProps) => {
 			return;
 		}
 
-		const scaleX = 1080 / 759;
-		const scaleY = 1350 / 948;
+		const scale = 1080 / componentToPrint.current.offsetWidth;
 
 		toPng(componentToPrint.current, {
 			width: 1080,
-			height: 1090,
+			height: 1350,
 			style: {
-				transform: `scale(${scaleY}, ${scaleX})`,
+				transform: `scale(${scale})`,
 				transformOrigin: 'top left',
-				width: '749px',
-				height: '948px',
+				width: `${componentToPrint.current.offsetWidth}px`,
+				height: `${componentToPrint.current.offsetHeight}px`,
 			},
 		})
 			.then((dataUrl) => {
 				const link = document.createElement('a');
-				link.download = 'my-image-name.png';
+				link.download = 'poster.png';
 				link.href = dataUrl;
 				link.click();
 			})
@@ -48,7 +45,7 @@ const EditorLayout = (props: SetFileProps) => {
 	};
 
 	return (
-		<div className='w-[749px] h-[948px] flex flex-col relative'>
+		<div className='w-[759px] h-[948px] flex flex-col relative'>
 			<EditHeader openPopup={props.openPopup} />
 			<div className='border-[1px] border-white98 my-[32px]' />
 			<div className='w-full h-[75px] bg-white97 py-[24px] px-[16px] rounded-[10px]'>
