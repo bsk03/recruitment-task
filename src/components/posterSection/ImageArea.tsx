@@ -29,7 +29,7 @@ const ImageArea = (props: ImageProps) => {
 		<div
 			className={`${
 				showEditBar ? 'border-[2px] border-Primary' : ''
-			} absolute top-[200px] select-none`}
+			} absolute top-[200px] select-none hover:cursor-pointer`}
 			ref={boxRef}
 			onMouseDown={() => setShowEditBar(true)}
 		>

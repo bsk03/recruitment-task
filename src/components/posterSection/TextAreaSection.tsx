@@ -56,7 +56,7 @@ const TextAreaSection = (props: TextAreaProps) => {
 
 	return (
 		<div
-			className={`absolute top-[200px] left-[220px] bg-transparent ${
+			className={`absolute top-[200px] left-[220px] bg-transparent hover:cursor-pointer ${
 				showEditBar && 'border-[2px] border-Primary'
 			} px-[24px] py-[12px]`}
 			ref={boxRef}
